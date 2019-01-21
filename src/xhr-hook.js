@@ -24,7 +24,7 @@
         }
 
         function proxyFunc (attrName) {
-            this[attrName] = function () { 
+            this[attrName] = function () {
                 let args = [].slice.call(arguments)
 
                 if (globalHook[attrName] && globalHook[attrName].apply(this, args) === false) {
@@ -35,7 +35,7 @@
         }
 
         function proxyProps (attrName) {
-            
+
             let rootScope = this
             let trueXhrScope = this.xhr
 
@@ -51,9 +51,6 @@
                     return getterResult
                 },
                 set: function (newValue) {
-                    if (attrName === 'onload') {
-                        console.log('bp')
-                    }
                     let type = Object.prototype.toString.call(globalHook[attrName])
                     if (type === '[object Function]') {
                         let args = [].slice.call(arguments)
